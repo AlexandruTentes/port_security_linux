@@ -1,0 +1,11 @@
+#!/bin/bash
+
+user=$1
+mod=$2
+
+if [ "$mod" == "" ]
+then
+    sudo rm /home/STARTUP_SCRIPTS/user_file_management/user_sshkey/users_checked/"$user" 2>/dev/null
+else
+    echo
+fi

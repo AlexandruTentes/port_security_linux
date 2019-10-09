@@ -1,0 +1,14 @@
+#!/bin/bash
+
+sudo truncate -s 0 /home/STARTUP_SCRIPTS/startup_scripts_success_check 2>/dev/null
+
+echo "startup_login_script successful" | sudo tee -a /home/STARTUP_SCRIPTS/startup_scripts_success_check > /dev/null
+
+sudo python /home/STARTUP_SCRIPTS/functionality_check/temperature_checker.py &
+sudo python /home/STARTUP_SCRIPTS/security_check/ip_connections.py &
+sudo python /home/STARTUP_SCRIPTS/security_check/ban_addresses.py &
+sudo python /home/STARTUP_SCRIPTS/user_file_management/user_sshkey/user_add_sshkey.py &
+
+sleep 5
+
+sudo /home/STARTUP_SCRIPTS/functionality_check/cooling_down &

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ip=$1
+last=$(sudo iptables -L INPUT -v -n | tail -1 | sed "s/^.*\*//" | sed "s/0\.0\.0\.0\/0//")
+last_ip=${last//[[:blank:]]/}
+
+tt=${ip//.0.*/}
+
+if [ "$ip" != "$last_ip" ] && [ "$tt" != "192.168" ]
+then
+    sudo iptables -A INPUT -s "$ip" -j DROP &&
+    sudo netfilter-persistent save 2>/dev/null &&
+    sudo netfilter-persistent reload 2>/dev/null
+fi
+
+sudo rm /home/STARTUP_SCRIPTS/security_check/ipaddresses/"$ip"

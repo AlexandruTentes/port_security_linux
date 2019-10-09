@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ips=$(grep "Failed password" /var/log/auth.log | sed "s/.*from//" | sed "s/port.*//" | cut -d' ' -f2)
+ips_date=$(grep "Failed password" /var/log/auth.log | sed "s/Failed.*//" | cut -d' ' -f3)
+

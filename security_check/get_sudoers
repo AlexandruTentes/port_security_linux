@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+sudo grep '^sudo:.*$' /etc/group | cut -d: -f4 | tr "," " "

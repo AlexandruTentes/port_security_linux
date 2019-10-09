@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ip=$1
+
+sudo iptables -D INPUT -s "$ip" -j DROP &&
+sudo netfilter-persistent save 2>/dev/null &&
+sudo netfilter-persistent reload 2>/dev/null

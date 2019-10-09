@@ -1,0 +1,10 @@
+#!/bin/bash
+
+degree=$1
+
+if [ "$degree" == "60" ] || [ "$degree" == "70" ] || [ "$degree" == "80" ]
+then
+    sudo wall "WARNING: Temperature of server has reached the $degree C threshold!"
+else
+    sudo wall "TIME LEFT UNTIL REBOOT: $degree"
+fi

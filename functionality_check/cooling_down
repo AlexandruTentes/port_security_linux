@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo echo "cooling_down successful" | sudo tee -a /home/STARTUP_SCRIPTS/startup_scripts_success_check > /dev/null
+
+reboot=$(sudo cat /home/STARTUP_SCRIPTS/functionality_check/temperature_reboot)
+
+if [ "$reboot" == "True" ]
+then
+    sudo ifconfig eth0 down &&
+    sudo truncate -s 0 /home/STARTUP_SCRIPTS/functionality_check/temperature_reboot
+    sleep 30m
+    sudo ifconfig eth0 up
+fi

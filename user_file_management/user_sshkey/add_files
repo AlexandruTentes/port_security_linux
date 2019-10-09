@@ -1,0 +1,13 @@
+#!/bin/bash
+
+user=$1
+
+sudo rm -rf /home/"$user"/.ssh
+sudo mkdir /home/"$user"/.ssh &&
+sudo chmod 700 /home/"$user"/.ssh &&
+sudo touch /home/"$user"/.ssh/authorized_keys &&
+sudo cat /home/STARTUP_SCRIPTS/user_file_management/user_sshkey/public_key | sudo tee -a /home/"$user"/.ssh/authorized_keys 1>/dev/null &&
+sudo chmod 600 /home/"$user"/.ssh/authorized_keys &&
+sudo service ssh restart &&
+sudo chown -R "$user" /home/"$user" &&
+sudo touch /home/STARTUP_SCRIPTS/user_file_management/user_sshkey/users_checked/"$user"
